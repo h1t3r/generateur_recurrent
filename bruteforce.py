@@ -3,18 +3,15 @@
 import string
 
 
-def setup_dict(length, tmp, tmp1):
-    print length
-    length -= 1
-    if length == 0:
-        for x in tmp:
-            yield x
-        exit()
+def setup_dict(length, tmp):
     tmp2 = []
-    for x in tmp:
-        tmp2 += list(map(lambda v: x+v, tmp1))
-    for x in setup_dict(length, tmp, tmp2):
-        yield x
+    tmp2 = list(tmp)
+    for i in range(length-1):
+        tmp1 = tmp2
+        for x in tmp1:
+            for y in tmp:
+                tmp2.append(x+y)
+                yield x+y
 
 
 def create_write_dict_to_file(length, dict_a, dict_n, dict_s):
