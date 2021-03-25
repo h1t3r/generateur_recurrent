@@ -7,7 +7,8 @@ def setup_dict(length, tmp):
     tmp2 = []
     tmp2 = list(tmp)
     for i in range(length-1):
-        tmp1 = tmp2
+        tmp1 = list(tmp2)
+        tmp2 = []
         for x in tmp1:
             for y in tmp:
                 tmp2.append(x+y)
