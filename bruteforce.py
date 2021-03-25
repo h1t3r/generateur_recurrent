@@ -9,7 +9,7 @@ def setup_dict(length, tmp):
     for i in range(length-1):
         tmp1 = list(tmp2)
         tmp2 = []
-        for x in tmp1:
+        for x in tmp:
             for y in tmp:
                 tmp2.append(x+y)
                 yield x+y
