@@ -4,7 +4,6 @@ import string
 
 
 def setup_dict(length, tmp):
-    tmp2 = []
     tmp2 = list(tmp)
     for i in range(length-1):
         tmp1 = list(tmp2)
@@ -17,11 +16,11 @@ def setup_dict(length, tmp):
 
 def create_write_dict_to_file(length, dict_a, dict_n, dict_s):
     if dict_a and dict_n and dict_s:
-        tmp = [ x for x in dict_a + dict_n + dict_s ]
+        tmp = dict_a + dict_n + dict_s
     elif dict_a and dict_n:
-        tmp = [ x for x in dict_a + dict_n ]
+        tmp = dict_a + dict_n
     elif dict_a:
-        tmp = [ x for x in dict_a]
+        tmp = dict_a
 
     file = open("dict.txt", "w+")
     for x in setup_dict(length, list(tmp)):
