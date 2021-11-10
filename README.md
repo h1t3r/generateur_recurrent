@@ -1,1 +1,1 @@
-# Générateur récurrent d'espace infini
+# Générateur récurrent d'Espaces infini
