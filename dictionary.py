@@ -13,10 +13,4 @@ def generateur_recurrent_d_espace_infini():
 		for x in generateur_recurrent_d_espace([x for x in range(1, i)],  "", i):
 			yield x
 
-def full_gen(dimension):
-	for i in range(1, dimension+1):
-		for x in generateur_recurrent_d_espace(alphabet, "", i):
-			yield x
-
-
 generateur_recurrent_d_espace_infini()
