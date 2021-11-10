@@ -1,3 +1,1 @@
-# dictionary
-
-Générateur récurrent d'espace infini.
+# Générateur récurrent d'espace infini.
