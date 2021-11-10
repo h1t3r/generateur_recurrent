@@ -1,7 +1,7 @@
 def generateur_recurrent_d_espace(alphabet_de_dimension,  coordonné, dimension):
 	for x in alphabet_de_dimension:
 		if len(coordonné)+1 < dimension:
-			for y in generateur_recurrent_d_espace(alphabet_de_dimension, str(coordonné) + str(x), dimension):
+			for y in generateur_recurrent_d_espace(alphabet_de_dimension, coordonné + str(x), dimension):
 				yield y
 		elif len(coordonné)+1 == dimension:
 			yield coordonné + str(x)
