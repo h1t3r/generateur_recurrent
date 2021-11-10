@@ -1,9 +1,9 @@
 def generateur_recurrent_d_espace(alphabet_de_dimension,  coordonné, dimension):
 	for x in alphabet_de_dimension:
-		if len(coordonné)-1 < dimension:
+		if len(coordonné)+1 < dimension:
 			for y in generateur_recurrent_d_espace(alphabet_de_dimension, coordonné + x, dimension):
 				yield y
-		elif len(coordonné)-1 == dimension:
+		elif len(coordonné)+1 == dimension:
 			yield coordonné + x
 
 def generateur_recurrent_d_espace_infini():
