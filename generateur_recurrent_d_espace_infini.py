@@ -16,5 +16,14 @@ def generateur_d_espace(dimension, a, coordonné, tmp, c, length_dimension):
 				dimension.append([tmp+str(i)])
 			yield dimension
 
-for y in generateur_d_espace([], 1, [x for x in range(0, 4)], "",0, 4):
-	print(y)
+def generateur_d_espace_infini():
+	i = 0
+	while True:
+		i = i +1
+		for y in generateur_d_espace([], 1, [x for x in range(0, i)], "",0, i):
+			yield y
+		if i == 3:
+			exit()
+
+for x in generateur_d_espace_infini():
+	print(x)
