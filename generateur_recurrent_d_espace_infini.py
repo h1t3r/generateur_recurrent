@@ -1,35 +1,20 @@
-def generateur_recurrent_d_espace(alphabet_de_dimension,  coordonné, dimension):
-	for x in alphabet_de_dimension:
-		if len(coordonné)+1 < dimension:
-			for y in generateur_recurrent_d_espace(alphabet_de_dimension, coordonné + str(x), dimension):
-				yield y
-		elif len(coordonné)+1 == dimension:
-			yield coordonné + str(x)
+def generateur_d_espace(dimension, a, coordonné, tmp, c, length_dimension):
+	if isinstance(dimension, list):
+		if a < length_dimension:
+			for i in coordonné:
+				dimension.append([tmp+str(i)])
+			for x in dimension:
+				if a == 1:
+					for y in generateur_d_espace(x, a+1, coordonné, tmp+x[c], c+1,length_dimension):
+						dimension[dimension.index(x)].append(y)
+				elif a > 1:
+					for y in generateur_d_espace(x, a+1, coordonné, x[0], c+1, length_dimension):
+						dimension[dimension.index(x)].append(y)
+			yield dimension
+		elif a == length_dimension:
+			for i in range(0, length_dimension):
+				dimension.append([tmp+str(i)])
+			yield dimension
 
-def rentrer_dans_dimension(dim, a, l, c,alphabet):
-	if a < l:
-		print(a)
-		if isinstance(dim, list):
-			dim.append([[c+str(i)] for i in range(0, l+1)])
-			print(dim)
-			for x in dim:
-				for i in range(0, l+1):
-					print("i="+str(i))
-					print("a="+str(a))
-					for y in rentrer_dans_dimension(x, a+1, l ,c+str(i), alphabet):
-						yield y
-	elif a == l:
-		if isinstance(dim, list):
-			for i in range(0, l+1):	
-				dim.append(c+str(i))
-		print(dim)
-		yield dim
-
-
-
-
-for x in rentrer_dans_dimension([], 1, 3, "", [x for x in range(1, 4)]):
-	print(x)
-	print("\n")
-
-#generateur_recurrent_d_espace_2d()
+for y in generateur_d_espace([], 1, [x for x in range(0, 4)], "",0, 4):
+	print(y)
