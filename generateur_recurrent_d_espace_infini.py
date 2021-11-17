@@ -5,7 +5,7 @@ def generateur_recurrent_d_espace(dimension, dimension_units, coordonnee, length
 				dimension.append([coordonnee+str(i)])
 			for x in dimension:
 				for y in generateur_recurrent_d_espace(x, dimension_units, x[0], length_coordonnee+1, length_dimension):
-					dimension[dimension.index(x)].append(y)
+					pass
 			yield dimension
 		elif length_coordonnee == length_dimension:
 			for i in dimension_units:
