@@ -1,10 +1,10 @@
-def generateur_recurrent_d_espace(dimension, a, unité_de_dimension, coordonné,length_dimension):
+def generateur_recurrent_d_espace(dimension, unité_de_dimension, coordonné, a, length_dimension):
 	if isinstance(dimension, list):
 		if a < length_dimension:
 			for i in unité_de_dimension:
 				dimension.append([coordonné+str(i)])
 			for x in dimension:
-				for y in generateur_recurrent_d_espace(x, a+1, unité_de_dimension, x[0], length_dimension):
+				for y in generateur_recurrent_d_espace(x, unité_de_dimension, x[0], a+1, length_dimension):
 					dimension[dimension.index(x)].append(y)
 			yield dimension
 		elif a == length_dimension:
@@ -16,10 +16,5 @@ def generateur_recurrent_d_espace_infini():
 	i = 0
 	while True:
 		i = i +1
-		for y in generateur_recurrent_d_espace([], 1, [x for x in range(0, i)], "", i):
+		for y in generateur_recurrent_d_espace([], [x for x in range(0, i)], "", 1, i):
 			yield y
-		if i == 3:
-			exit()
-
-for x in generateur_recurrent_d_espace_infini():
-	print(x)
