@@ -18,6 +18,3 @@ def generateur_d_espace_infini():
 		i = i +1
 		for y in generateur_d_espace([], 1, [x for x in range(0, i)], "", i):
 			yield y
-
-for x in generateur_d_espace_infini():
-	print(x)
