@@ -17,4 +17,4 @@ def generateur_recurrent_d_espace_infini():
 	while True:
 		i = i +1
 		for y in generateur_recurrent_d_espace([], range(0, i), "", i):
-			yield y
+			yield y 
