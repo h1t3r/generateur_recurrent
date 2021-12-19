@@ -23,8 +23,7 @@ def generateur_recurrent_d_espace_infini():
         dimension = []
         i = i +1
         x = threading.Thread(target=generateur_recurrent_d_espace, args=(dimension, range(0, i), "", i,))
-        x.start()
-        x.join()
+        x.run()
         print(dimension)
 
 generateur_recurrent_d_espace_infini()
