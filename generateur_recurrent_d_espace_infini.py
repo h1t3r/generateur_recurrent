@@ -1,4 +1,3 @@
-from find import find
 import threading
 
 dimension = []
