@@ -1,29 +1,17 @@
-from find import find
-import threading
-
-dimension = []
-
-def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee = "", dimension_length = 0):
-    global dimension
-    if isinstance(dimension0, list):
-        if len(coordonnee)+1 < dimension_length:
-            for i in dimension_units:
-                dimension0.append([coordonnee+str(i)])
-            for x in dimension0:
-                y = threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,))
-                y.run()
-        elif len(coordonnee)+1 == dimension_length:
-            for i in dimension_units:
-                dimension0.append([coordonnee+str(i)])
+def generateur_recurrent_d_espace(alphabet_de_dimension,  coordonnee, dimension):
+    for i in alphabet_de_dimension:
+        if len(coordonnee.replace(" ", ""))+1 < dimension:
+            for y in generateur_recurrent_d_espace(alphabet_de_dimension, coordonnee + " " + str(i), dimension):
+                yield y
+        elif len(coordonnee.replace(" ", ""))+1 == dimension:
+            yield coordonnee + " " + str(i)
 
 def generateur_recurrent_d_espace_infini():
-    global dimension
     i = 0
     while True:
-        dimension = []
-        i = i +1
-        x = threading.Thread(target=generateur_recurrent_d_espace, args=(dimension, range(0, i), "", i,))
-        x.run()
-        print(dimension)
+        i = i + 1
+        for x in generateur_recurrent_d_espace([x for x in range(0, i)],  "", i):
+            yield x
 
-generateur_recurrent_d_espace_infini()
+for x in generateur_recurrent_d_espace_infini():
+    print(x)
