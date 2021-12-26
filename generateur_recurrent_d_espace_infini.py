@@ -1,5 +1,5 @@
-from find import find
 import threading
+import multiprocessing
 
 dimension = []
 
@@ -25,5 +25,4 @@ def generateur_recurrent_d_espace_infini():
         x = threading.Thread(target=generateur_recurrent_d_espace, args=(dimension, range(0, i), "", i,))
         x.run()
         print(dimension)
-
 generateur_recurrent_d_espace_infini()
