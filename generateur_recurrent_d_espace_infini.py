@@ -1,29 +1,28 @@
-import threading
-import multiprocessing
-
-dimension = []
-
-def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee = "", dimension_length = 0):
-    global dimension
-    if isinstance(dimension0, list):
-        if len(coordonnee)+1 < dimension_length:
-            for i in dimension_units:
-                dimension0.append([coordonnee+str(i)])
-            for x in dimension0:
-                y = threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,))
-                y.run()
-        elif len(coordonnee)+1 == dimension_length:
-            for i in dimension_units:
-                dimension0.append([coordonnee+str(i)])
+def generateur_recurrent_d_espace(alphabet_de_dimension,  coordonnee, dimension, mem):
+    for i in alphabet_de_dimension:
+        if len(mem) == dimension and len(mem[0]) < dimension:
+            for x in mem:
+                yield (x[::-1]+str(i))[::-1]
+        yield i
 
 def generateur_recurrent_d_espace_infini():
-    global dimension
     i = 0
+    mem = []
+    using_mem = False
     while True:
-        dimension = []
-        i = i +1
-        x = threading.Thread(target=generateur_recurrent_d_espace, args=(dimension, range(0, i), "", i,))
-        x.run()
-        print(dimension)
+        i = i + 1
+        if i == 1:
+            for x in generateur_recurrent_d_espace(range(0, i),  "", i, [str(i) for i in range(0, i)]):
+                mem.append(x)
+                yield x
+        elif i > 1:
+            using_mem = True
+            for x in generateur_recurrent_d_espace(range(0, i),  "", i, mem):
+                if using_mem:
+                    mem = []
+                    using_mem = False
+                mem.append(x)
+                yield x
 
-generateur_recurrent_d_espace_infini()
+for x in generateur_recurrent_d_espace_infini():
+    print(x)
