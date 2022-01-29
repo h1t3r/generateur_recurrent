@@ -1,11 +1,9 @@
 import threading
 
 dimension = []
-i = 0
 threads = []
 def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee = "", dimension_length = 0):
     global dimension
-    global i
     if isinstance(dimension0, list):
         if len(coordonnee)+1 < dimension_length:
             for i in dimension_units:
@@ -26,7 +24,6 @@ def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee 
         elif len(coordonnee)+1 == dimension_length:
             for i in dimension_units:
                 dimension0.append([coordonnee+str(i)])
-
 def generateur_recurrent_d_espace_infini():
     global dimension
     i = 0
