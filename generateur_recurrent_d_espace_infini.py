@@ -1,30 +1,31 @@
 import threading
-import multiprocessing
-from time import sleep
 
 dimension = []
-
-def generateur_recurrent_d_espace(z, dimension_units=[], coordonnee = "", dimension_length = 0):
+i = 0
+threads = []
+def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee = "", dimension_length = 0):
     global dimension
-    if isinstance(dimension, list):
+    global i
+    if isinstance(dimension0, list):
         if len(coordonnee)+1 < dimension_length:
             for i in dimension_units:
-                if z == []:
+                if dimension0 == []:
                     dimension.append([coordonnee+str(i)])
                 else:
-                    z.append([coordonnee+str(i)])
-            if z == []:
+                    dimension0.append([coordonnee+str(i)])
+            if dimension0 == []:
                 for x in dimension:
-                    y = threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,))
-                    y.start()
-                    print(dimension)
+                    threads.append(threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,)))
+                    threads[len(threads)-1].start()
+                for t in threads:
+                    t.join()
             else:
-                for x in z:
-                    y = threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,))
-                    y.start()
+                for x in dimension0:
+                    threads.append(threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,)))
+                    threads[len(threads)-1].start()
         elif len(coordonnee)+1 == dimension_length:
             for i in dimension_units:
-                z.append([coordonnee+str(i)])
+                dimension0.append([coordonnee+str(i)])
 
 def generateur_recurrent_d_espace_infini():
     global dimension
