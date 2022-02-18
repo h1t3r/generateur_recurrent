@@ -13,13 +13,14 @@ def generateur_recurrent_d_espace(dimension0=[], dimension_units=[], coordonnee 
                     dimension0.append([coordonnee+str(i)])
             if dimension0 == []:
                 for x in dimension:
-                    y = threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,))
-                    y.start()
-                    y.join()
+                    threads.append(threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,)))
+                    threads[len(threads)-1].start()
+                for t in threads:
+                    t.join()
             else:
                 for x in dimension0:
                     threads.append(threading.Thread(target=generateur_recurrent_d_espace, args=(x, dimension_units, x[0], dimension_length,)))
-                    threads[len(threads)-1].run()
+                    threads[len(threads)-1].start()
         elif len(coordonnee)+1 == dimension_length:
             for i in dimension_units:
                 dimension0.append([coordonnee+str(i)])
@@ -32,4 +33,6 @@ def generateur_recurrent_d_espace_infini():
         x = threading.Thread(target=generateur_recurrent_d_espace, args=([], range(0, i), "", i,))
         x.run()
         print(dimension)
+        if i == 4:
+            exit()
 generateur_recurrent_d_espace_infini()
